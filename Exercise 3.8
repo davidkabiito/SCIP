@@ -1,0 +1,68 @@
+#lang racket
+
+(define (make-account password balance)
+  (define (make-withdraw password1 amount)
+    (if (eq? password password1)
+        (begin (set! balance (- balance amount))
+               balance)
+        (display "Wrong password")))
+        
+  (define (make-deposit password1 amount)
+    (if (eq? password password1)
+        (begin (set! balance (+ balance amount))
+               balance)
+        (display "Wrong password")))
+  
+  (define acc-password password)
+             
+  (define (dispatch op)
+    (cond ((eq? op 'make-withdraw) make-withdraw)
+          ((eq? op 'make-deposit) make-deposit)
+          ((eq? op 'acc-password) acc-password)
+          (else (error "unknown operation---MAKE-ACCOUNT"))))
+  dispatch)
+
+(define peter (make-account 'peterpass 100))
+(define willy (make-account 'willypass 200))
+
+;(define paul peter)
+
+;((peter 'make-withdraw) 'peterpass1 30)
+
+
+
+(define (make-joint acc1 acc1password newpassword)
+  (define password (acc1 'acc-password ))
+  (if (eq? password acc1password)
+      acc1 
+      (display "wrong password")))
+
+(define paul (make-joint peter 'peterpass 'paulpass))
+
+;((paul 'make-deposit) 'peterpass 20)
+;((paul 'make-withdraw) 'peterpass 40)
+
+
+((lambda(year)(year 2018))
+(lambda(year) 2017))
+
+((lambda(year)2018)
+(lambda(year) 2016))
+
+(define d (lambda(year) 2018))
+
+(d 3)
+
+(car (cons 'Makerere (- 2017 92)))
+
+
+(define country '(Uganda Kenya Tanzania))
+(define city '(Kampala Nairobi Dodoma))
+
+country
+city
+
+(cons country city)
+(append country city)
+(list country city)
+
