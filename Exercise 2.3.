@@ -1,0 +1,53 @@
+(define (make-segment a b)(cons a b))
+(define (start-segment x)(car x))
+(define (end-segment x)(cdr x))
+
+(define (make-point x y)(cons x y))
+(define (x-point x)(car x))
+(define (y-point x)(cdr x))
+
+;Square Procedure
+(define (square x)(* x x))
+
+;Sum-of-Square Procedure
+(define (sum-of-square a b)(+ (square a) (square b)))
+
+;length procedure
+(define (length s)
+  (let ((start (start-segment s)))
+    (let ((end (end-segment s)))
+    (sqrt (sum-of-square (- (x-point start)(x-point end))
+                         (- (y-point start)(y-point end)))))))
+
+(define A (make-point 1 2))
+(define B (make-point 3 2))
+(define C (make-point 1 -1))
+
+
+(define S1 (make-segment A B))
+(define S2 (make-segment A C))
+
+(length S1)
+(length S2)
+
+(define (make-rectangle s1 s2)(cons s1 s2))
+(define (first-segment R)(car R))
+(define (second-segment R)(cdr R))
+ 
+(define (area-rectangle R)
+  (let (( L (first-segment R)))
+    (let (( W (second-segment R)))
+      (* (length L)(length W)))))
+
+(define (perimeter-rectangle R)
+  (let ((L (first-segment R)))
+    (let ((W (second-segment R)))
+      (+(* 2 (length L))(* 2 (length W))))))
+
+(define R (make-rectangle S1 S2))
+
+(display "Area:")
+(area-rectangle R)
+
+(display "PERIMETER:")
+(perimeter-rectangle R)
