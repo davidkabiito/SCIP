@@ -1,0 +1,90 @@
+#lang racket
+(define balance 100)
+(define (withdraw amount)
+  (if(>= balance amount)
+     (begin (set! balance (- balance amount))
+            balance)
+     "Insufficient Balance"))
+
+
+;(withdraw 10)
+;(withdraw 20)
+;(withdraw 80)
+
+(define (new-withdraw balance)
+  ;(let ([balance 100])
+    (lambda(amount)
+      ;(let ([balance 100])
+      (if (>= balance amount)
+          (begin (set! balance (- balance amount))
+                 balance)
+          "Insufficient Balance")))
+
+;(define w1 (new-withdraw 100))
+;(define w2 (new-withdraw 200))
+
+;w1
+;(w1 10)
+;w2
+;(w2 50)
+;(w2 50)
+
+
+(define (make-account balance)
+  (define (withdraw amount)
+    (if(>= balance amount)
+       (begin (set! balance (- balance amount))
+              balance)
+       "Insufficient Balance"))
+  (define (deposit amount)
+    (begin (set! balance (+ balance amount))
+                 balance))
+  (define (dispatch op)
+    (cond ((eq? op 'withdraw)withdraw)
+          ((eq? op 'deposit)deposit)
+          (else("Unknown operation--MAKE-ACCOUNT" ))))
+  dispatch)
+
+(define acc1 (make-account 100))
+(define acc2 (make-account 200))
+
+((acc1 'deposit) 50)
+((acc1 'deposit) 50)
+((acc1 'withdraw) 150)
+
+
+(define (make-accumulator init_value)
+  (define (make-sum amount)
+    (set! init_value (+ init_value amount))
+    init_value)
+  (define (dispatch op)
+    (cond((eq? op 'make-sum)make-sum)
+         (else ("unknown operation MAKE-ACCUMULATE" op))))
+  dispatch)
+
+(define A1 (make-accumulator 1))
+(define A2 (make-accumulator 5))
+((A1 'make-sum)6)
+((A2 'make-sum)6)
+
+
+
+;Functionality for withdraw and deposit to added
+(define (make-account1 password balance)
+  (define (withdraw amount)
+    balance)
+  (define (deposit amount)
+    balance)
+  (define (incorrect-pass ammount)
+    (display "Incorrect password"))
+  (define (dispatch password1 op)
+    (cond 
+          ((not (eq? password1 password))incorrect-pass)
+          ((eq? op 'withdraw)withdraw)
+          ((eq? op 'deposit)deposit)
+          (else ("Unknown Operation--MAKE-ACCOUNT" op))))
+  dispatch)
+
+(define acc3 (make-account1 'some-password 1000))
+((acc3 'some-password1 'withdraw)100)
+    
