@@ -1,0 +1,23 @@
+;Exercise 3.1.
+
+(define (make-accumulator init-value)
+  (define (add-value increment)
+    (begin(set! init-value (+ init-value increment))
+           init-value))
+  (define (sub-value decrement)
+    (begin(set! init-value (- init-value decrement))
+          init-value))
+  (define (dispatch op)
+    (cond ((eq? op 'add-value) add-value)
+          ((eq? op 'sub-value) sub-value)
+          (else(error "Error unknow operation--MAKE-ACCUMULATOR"))))
+  dispatch)
+
+(define A (make-accumulator 0))
+(define B (make-accumulator 20))
+((A 'add-value)10)
+((A 'add-value)10)
+((A 'add-value)10)
+((A 'sub-value)10)
+((A 'add-value)-10)
+((B 'add-value)1)
