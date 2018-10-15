@@ -1,0 +1,24 @@
+#lang racket
+(define (make-segment a b)(cons a b))
+(define (start-segment x)(car x))
+(define (end-segment x)(cdr x))
+
+(define (make-point x y)(cons x y))
+(define (x-point x)(car x))
+(define (y-point x)(cdr x))
+
+(define (midpoint-segment a b)
+  (make-point
+   (/(+ (x-point a)(x-point b))2)
+   (/(+ (y-point a)(y-point b))2)))
+
+(define start (make-point 1 2))
+(define end (make-point 3 5))
+
+(define mid (midpoint-segment start end))
+
+(x-point mid)
+(y-point mid)
+
+start
+mid
