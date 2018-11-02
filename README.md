@@ -1,2 +1,2 @@
 # SCIP
-Exercises in Structured Interpretation of programs 
+Exercises in Structured Interpretation of Computer Programs 
