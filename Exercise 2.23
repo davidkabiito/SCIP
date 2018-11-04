@@ -18,4 +18,4 @@
       (begin (proc (car lst)) (for-each proc (cdr lst)))
       ))
 
-(for-each (lambda(x)(newline)(display x)) (list 1 2 3 4))
+(for-each (lambda(x)(newline)(display x)) (list 57 321 88))
